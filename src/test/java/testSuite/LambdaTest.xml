@@ -1,0 +1,14 @@
+<!-- <?xml version="1.0" encoding="UTF-8" ?> -->
+<!-- <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"> -->
+<suite name="Segment Based AccountProfiles Regression Suite">
+	<parameter name="driverType" value="local" />
+	<parameter name="port" value="4444" />
+	<parameter name="https" value="true" />
+	<parameter name="browser" value="chrome" />
+	<parameter name="environment" value="gm" />
+ 	<test thread-count="5" name="Test">
+  	<classes>
+  			<class name="com.example.demo.MainPageTest"/>
+    </classes>
+  	</test>
+</suite>
