@@ -21,11 +21,10 @@ mvn install
 To run the tests on Lambdatest infrastructure, use the userName and authKey that Lambdatest provides once you register to their platform, and pass driverType as remote.
 - Platform can be **Windows 8** or **MacOS Catalina**
 - browser can be **CHROME** or **FIREFOX**
-- Use threadCount(optional) if you want to run the test methods in parallel
+- selenide options are mandatory since we use the selenide library
 
 ```bash
-mvn test -Dusername=<username_of_lambatest> -DauthKey=<authKey> -Dbrowser=CHROME -DdriverType=remote  "-Dplatform=Windows 8"
--Dsurefire.suiteXmlFiles=src/test/java/testSuite/LambdaTest.xml -DthreadCount=2
+mvn verify -Dusername=<userName> -DauthKey=<authKey> -Dbrowser=FIREFOX -DdriverType=remote  "-Dplatform=MacOS Monterey" -Dselenide.remote=https://<username>:<authkey>@hub.lambdatest.com/wd/hub -Dselenide.browserSize=1024x900 -Dselenide.browser=FIREFOX
 	
 ```
 
