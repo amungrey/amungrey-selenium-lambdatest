@@ -1,0 +1,7 @@
+ /allure-results/*
+ /target/*
+
+ #IntelliJ
+ .DS_Store
+ .idea
+ *.iml

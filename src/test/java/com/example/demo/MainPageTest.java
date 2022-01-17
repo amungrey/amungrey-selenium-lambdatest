@@ -8,8 +8,7 @@ import org.testng.annotations.*;
 import java.net.MalformedURLException;
 import java.time.Duration;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.actions;
+import static com.codeborne.selenide.Selenide.*;
 
 
 public class MainPageTest extends BaseTest{
@@ -119,6 +118,11 @@ public class MainPageTest extends BaseTest{
             //softAssert.fail();
         }
         //softAssert.assertAll();
+    }
+
+    @AfterClass
+    public void teardown() {
+        closeWebDriver();
     }
 
 }
