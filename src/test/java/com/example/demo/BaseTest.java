@@ -1,14 +1,10 @@
 package com.example.demo;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
@@ -16,10 +12,6 @@ import org.testng.asserts.SoftAssert;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import static com.codeborne.selenide.Browsers.CHROME;
-import static com.codeborne.selenide.Browsers.FIREFOX;
-import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 import org.testng.annotations.Parameters;
 public class BaseTest {
@@ -44,39 +36,28 @@ public class BaseTest {
         caps.setCapability("platform", platform);
         caps.setCapability("browserName", browser);
         caps.setCapability("version", "latest");
-        caps.setCapability("build", "TestNG With Java and Lambdatest");
-        caps.setCapability("name", "First test");
+        caps.setCapability("build", "Lambdatest Exam");
+        caps.setCapability("name", "SubmissionTest-FF");
         caps.setCapability("plugin", "git-testng");
         caps.setCapability("network",true);
+        caps.setCapability("visual",true);
         caps.setCapability("systemLog", true);
         caps.setCapability("commandLog", true);
         caps.setCapability("video",true);
+        caps.setCapability("console", true); // To capture console logs
 
         String[] Tags = new String[] { "Feature", "Falcon", "Severe" };
         caps.setCapability("tags", Tags);
+        System.out.println(caps);
 
         if (driverType.equalsIgnoreCase("remote")) {
             RemoteWebDriver driver = new RemoteWebDriver(new URL("https://" + username + ":" + authKey + hub), caps);
-
+            System.out.println("https://" + username + ":" + authKey + hub);
             WebDriverRunner.setWebDriver(driver);
-        }
-        else
-        {
-            if (browser.equalsIgnoreCase(FIREFOX)) {
-                WebDriverManager.firefoxdriver().setup();
-                WebDriver driver = new FirefoxDriver();
-                WebDriverRunner.setWebDriver(driver);
-            }
-            else if (browser.equalsIgnoreCase(CHROME)) {
-                WebDriverManager.chromedriver().setup();
-                WebDriver driver = new ChromeDriver();
-                WebDriverRunner.setWebDriver(driver);
-            }
 
         }
 
-        Configuration.browserSize = "1280x800";
-        SelenideLogger.addListener("allure", new AllureSelenide());
+       SelenideLogger.addListener("allure", new AllureSelenide());
 
     }
 
@@ -86,10 +67,7 @@ public class BaseTest {
     public void launchBrowser() {
         open("https://www.lambdatest.com/selenium-playground/");
         System.out.println("Title Shows" + Selenide.title());
-    }
 
-    public void closeBrowser(){
-        Selenide.closeWebDriver();
     }
 
 

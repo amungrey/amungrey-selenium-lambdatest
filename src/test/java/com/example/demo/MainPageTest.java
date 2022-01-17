@@ -35,6 +35,7 @@ public class MainPageTest extends BaseTest{
         try {
             //Open LambdaTest’s Selenium Playground from: https://www.lambdatest.com/selenium-playground
             launchBrowser();
+            seleniumPlaygroundPage.simpleFormDemo.shouldBe(Condition.visible);
             //Click “Simple Form Demo” under Input Forms
             seleniumPlaygroundPage.simpleFormDemo.click();
             //Validate that the URL contains “simple-form-demo”.
@@ -42,6 +43,7 @@ public class MainPageTest extends BaseTest{
             //Create a variable for a string value E.g: “Welcome to LambdaTest”
             String text ="Welcome to LambdaTest";
             //Use this variable to enter values in the “Enter Message” text box
+            seleniumPlaygroundPage.enterMessageTextBox.shouldBe(Condition.visible);
             seleniumPlaygroundPage.enterMessageTextBox.sendKeys(text);
             //Assert and Click “Get Checked Value”.
             softAssert.assertEquals(seleniumPlaygroundPage.getCheckedCTA.getText(), "Get Checked value", "CTA button text does not match");
@@ -69,6 +71,7 @@ public class MainPageTest extends BaseTest{
             //Open the https://www.lambdatest.com/selenium-playground page
             launchBrowser();
             // click “Drag & Drop Sliders” under “Progress Bars & Sliders
+            seleniumPlaygroundPage.dragAndDrop.shouldBe(Condition.visible);
             seleniumPlaygroundPage.dragAndDrop.click();
             for (int i=15; i<95; i++) {
                 seleniumPlaygroundPage.dragMe.sendKeys(Keys.RIGHT);
@@ -101,6 +104,7 @@ public class MainPageTest extends BaseTest{
     public void testScenario3() {
         try {
             launchBrowser();
+            seleniumPlaygroundPage.inputFormSubmit.shouldBe(Condition.visible);
             seleniumPlaygroundPage.inputFormSubmit.click();
             seleniumPlaygroundPage.submitButton.click();
             //Assert “Please fill in the fields” error message.
@@ -137,7 +141,8 @@ public class MainPageTest extends BaseTest{
 
     @AfterClass
     public void teardown() {
-        closeWebDriver();
+        //closeWebDriver();
+        Selenide.closeWebDriver();
     }
 
 }
