@@ -61,6 +61,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
+                    <suiteXmlFiles>${file}</suiteXmlFiles>
+                    <parallel>methods</parallel>
+                    <threadCount>5</threadCount>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"

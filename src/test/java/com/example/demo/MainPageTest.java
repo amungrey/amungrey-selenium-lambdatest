@@ -4,6 +4,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.testng.annotations.*;
 import java.net.MalformedURLException;
 import java.time.Duration;
@@ -31,15 +33,20 @@ public class MainPageTest extends BaseTest{
      */
     public void testScenario1() {
         try {
+            //Open LambdaTest’s Selenium Playground from: https://www.lambdatest.com/selenium-playground
             launchBrowser();
-            System.out.println(WebDriverRunner.url());
+            //Click “Simple Form Demo” under Input Forms
             seleniumPlaygroundPage.simpleFormDemo.click();
+            //Validate that the URL contains “simple-form-demo”.
             softAssert.assertTrue(WebDriverRunner.url().contains("simple-form-demo"), "URL does not contain the text");
-            System.out.println(WebDriverRunner.url());
+            //Create a variable for a string value E.g: “Welcome to LambdaTest”
             String text ="Welcome to LambdaTest";
+            //Use this variable to enter values in the “Enter Message” text box
             seleniumPlaygroundPage.enterMessageTextBox.sendKeys(text);
+            //Assert and Click “Get Checked Value”.
             softAssert.assertEquals(seleniumPlaygroundPage.getCheckedCTA.getText(), "Get Checked value", "CTA button text does not match");
             seleniumPlaygroundPage.getCheckedCTA.click();
+            //Validate whether the same text message is displayed in the right-hand* panel under the “Your Message:” section
             softAssert.assertEquals(seleniumPlaygroundPage.message.getText(), "Welcome to LambdaTest", "Message does not match");
         }
         catch (Exception e)
@@ -59,22 +66,22 @@ public class MainPageTest extends BaseTest{
      */
     public void testScenario2() {
         try {
+            //Open the https://www.lambdatest.com/selenium-playground page
             launchBrowser();
-            //softAssert.assertTrue(seleniumPlaygroundPage.dragAndDrop.isDisplayed(), "Drag and drop is not displayed");
+            // click “Drag & Drop Sliders” under “Progress Bars & Sliders
             seleniumPlaygroundPage.dragAndDrop.click();
-            //seleniumPlaygroundPage.dragMe.dragAndDropTo(String.valueOf(55));
-            //Selenide.sleep(100);
-            //Thread.sleep(100);
-            //actions().()
-            actions().moveToElement(seleniumPlaygroundPage.rangeSuccess).click(seleniumPlaygroundPage.dragMe).perform();
-            System.out.println(seleniumPlaygroundPage.rangeSuccess.getText());
-
+            for (int i=15; i<95; i++) {
+                seleniumPlaygroundPage.dragMe.sendKeys(Keys.RIGHT);
+                Selenide.sleep(200);
+            }
+            //validating whether the range value shows 95.
+            softAssert.assertEquals(seleniumPlaygroundPage.rangeSuccess.getText(), "95", "Slider value does not match");
         }
         catch (Exception e)
         {
-            //softAssert.fail();
+            softAssert.fail();
         }
-        //softAssert.assertAll();
+        softAssert.assertAll();
     }
 
 
@@ -96,7 +103,9 @@ public class MainPageTest extends BaseTest{
             launchBrowser();
             seleniumPlaygroundPage.inputFormSubmit.click();
             seleniumPlaygroundPage.submitButton.click();
-            //FixMe: Assert “Please fill in the fields” error message.
+            //Assert “Please fill in the fields” error message.
+            softAssert.assertEquals(seleniumPlaygroundPage.name.getAttribute("validationMessage"), "Please fill out this field.", "Validation error message text does not match");
+            //Fill in Name, Email, and other fields
             seleniumPlaygroundPage.name.sendKeys("Akshay");
             seleniumPlaygroundPage.email.sendKeys("Akshay@test.com");
             seleniumPlaygroundPage.password.sendKeys("test");
@@ -108,16 +117,22 @@ public class MainPageTest extends BaseTest{
             seleniumPlaygroundPage.address1.sendKeys("123");
             seleniumPlaygroundPage.state.sendKeys("New York");
             seleniumPlaygroundPage.zip.sendKeys("94538");
+            //Fill all fields and click “Submit”.
             seleniumPlaygroundPage.inputFormSubmit.click();
-            //Selenide.
-            //Thanks for contacting us, we will get back to you
-            //$(By.cssSelector(".success-msg.hidden")).shouldBe(Condition.visible, Duration.ofSeconds(30));
+            //validate the success message
+            softAssert.assertEquals(seleniumPlaygroundPage.hiddenMessage.getAttribute("textContent"), "Thanks for contacting us, we will get back to you shortly.", "Success message is not displayed");
         }
         catch (Exception e)
         {
-            //softAssert.fail();
+            softAssert.fail();
         }
-        //softAssert.assertAll();
+        softAssert.assertAll();
+    }
+
+    @AfterMethod
+    public void closeBrowser()
+    {
+        Selenide.closeWindow();
     }
 
     @AfterClass

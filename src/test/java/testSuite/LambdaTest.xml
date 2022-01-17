@@ -1,6 +1,6 @@
 <!-- <?xml version="1.0" encoding="UTF-8" ?> -->
 <!-- <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"> -->
-<suite name="Segment Based AccountProfiles Regression Suite">
+<suite name="LambdaTest Suite" parallel="methods">
 	<parameter name="driverType" value="local" />
 	<parameter name="port" value="4444" />
 	<parameter name="https" value="true" />

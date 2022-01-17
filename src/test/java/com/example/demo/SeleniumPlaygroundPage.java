@@ -16,7 +16,7 @@ public class SeleniumPlaygroundPage {
     public SelenideElement dragAndDrop =$(By.linkText("Drag & Drop Sliders"));
     public SelenideElement dragMe = $(By.xpath("/html[1]/body[1]/div[1]/div[1]/section[3]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/input[1]"));
     public SelenideElement rangeSuccess = $(By.cssSelector("#rangeSuccess"));
-    //public SelenideElement searchButton = $("[data-test=menu-main-icon-search]");
+
 
     public SelenideElement inputFormSubmit =$(By.linkText("Input Form Submit"));
     public SelenideElement submitButton = $(By.xpath("//button[contains(text(),'Submit')]"));
@@ -31,4 +31,5 @@ public class SeleniumPlaygroundPage {
     public SelenideElement address2 = $(By.cssSelector("#inputAddress2"));
     public SelenideElement state = $(By.cssSelector("#inputState"));
     public SelenideElement zip = $(By.cssSelector("#inputZip"));
+    public SelenideElement hiddenMessage = $(By.xpath("//p[@class='success-msg hidden']"));
 }

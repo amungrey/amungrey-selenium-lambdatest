@@ -33,14 +33,11 @@ public class BaseTest {
 
     @Parameters({ "browserName", "Chrome" })
     public static void setUpAll() throws MalformedURLException {
-        //String username = "mungreyakshay";
         String username = System.getProperty("username");
         String authKey = System.getProperty("authKey");
         String browser=System.getProperty("browser");
         String driverType=System.getProperty("driverType"); //local or remote
-        String platform="MacOS Catalina";
-        //String platform=System.getProperty("platform");
-        //String authkey = "n1249r85iLkL6fgV9CfDweN4ANch5zE6Eu5m1A8Q2Bjn46aV7z";
+        String platform=System.getProperty("platform");
         String hub = "@hub.lambdatest.com/wd/hub";
 
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -51,6 +48,9 @@ public class BaseTest {
         caps.setCapability("name", "First test");
         caps.setCapability("plugin", "git-testng");
         caps.setCapability("network",true);
+        caps.setCapability("systemLog", true);
+        caps.setCapability("commandLog", true);
+        caps.setCapability("video",true);
 
         String[] Tags = new String[] { "Feature", "Falcon", "Severe" };
         caps.setCapability("tags", Tags);
@@ -58,7 +58,6 @@ public class BaseTest {
         if (driverType.equalsIgnoreCase("remote")) {
             RemoteWebDriver driver = new RemoteWebDriver(new URL("https://" + username + ":" + authKey + hub), caps);
 
-            //uncomment me when running on LambdaTest
             WebDriverRunner.setWebDriver(driver);
         }
         else
@@ -87,6 +86,10 @@ public class BaseTest {
     public void launchBrowser() {
         open("https://www.lambdatest.com/selenium-playground/");
         System.out.println("Title Shows" + Selenide.title());
+    }
+
+    public void closeBrowser(){
+        Selenide.closeWebDriver();
     }
 
 
