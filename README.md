@@ -18,9 +18,9 @@ mvn install
 
 ## To run the tests
 
-To run the tests on Lambdatest infrastructure, use the userName and authKey that Lambdatest and pass driverType as remote.
-Platform can be **Windows 8** or **MacOS Catalina**
-browser can be **CHROME** or **FIREFOX**
+To run the tests on Lambdatest infrastructure, use the userName and authKey that Lambdatest provides once you register to their platform, and pass driverType as remote.
+- Platform can be **Windows 8** or **MacOS Catalina**
+- browser can be **CHROME** or **FIREFOX**
 
 ```bash
 mvn test -Dusername=<username_of_lambatest> -DauthKey=<authKey> -Dbrowser=CHROME -DdriverType=remote  "-Dplatform=Windows 8"
