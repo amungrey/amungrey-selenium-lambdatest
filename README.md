@@ -19,7 +19,7 @@ mvn install
 ## To run the tests
 
 To run the tests on Lambdatest infrastructure, use the userName and authKey that Lambdatest provides once you register to their platform, and pass driverType as remote.
-- Platform can be **Windows 8** or **MacOS Catalina**
+- Platform can be **Windows 8** or **MacOS Monterey**, refer: https://www.lambdatest.com/capabilities-generator/ to generate the capability
 - browser can be **CHROME** or **FIREFOX**
 - selenide options are mandatory since we use the selenide library
 
